@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* Project Anchor - ADHD Productivity Design System */
+@theme inline {
+  /* Core Palette */
+  --color-primary: #6366F1;       /* Indigo - actions */
+  --color-primary-dark: #4F46E5;
+  --color-success: #22C55E;       /* Green - completed */
+  --color-success-dark: #16A34A;
+  --color-warning: #F59E0B;       /* Amber - attention */
+  --color-danger: #EF4444;        /* Red - HP loss */
+  --color-xp: #A855F7;            /* Purple - experience */
+  --color-gold: #EAB308;          /* Yellow - currency */
+  
+  /* Backgrounds */
+  --color-bg-dark: #0F172A;       /* Slate 900 */
+  --color-bg-card: #1E293B;       /* Slate 800 */
+  --color-bg-elevated: #334155;   /* Slate 700 */
+  
+  /* Text */
+  --color-text: #F1F5F9;          /* Slate 100 */
+  --color-text-muted: #94A3B8;    /* Slate 400 */
+  
+  /* Font */
+  --font-sans: var(--font-nunito);
+}
+
+/* Base styles */
+body {
+  background: var(--color-bg-dark);
+  color: var(--color-text);
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Card glow effects */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.15);
+}
+
+.glow-xp {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.3), 0 0 40px rgba(234, 179, 8, 0.15);
+}
+
+/* Interactive elements */
+.interactive {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.interactive:hover {
+  transform: translateY(-2px);
+}
+
+.interactive:active {
+  transform: scale(0.98);
+}
+
+/* Progress bars */
+.progress-bar {
+  background: var(--color-bg-elevated);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.5s ease-out;
+}
+
+/* XP bar gradient */
+.xp-gradient {
+  background: linear-gradient(90deg, #A855F7 0%, #6366F1 100%);
+}
+
+/* HP bar gradient */
+.hp-gradient {
+  background: linear-gradient(90deg, #EF4444 0%, #F97316 100%);
+}
+
+/* Streak fire animation */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.streak-fire {
+  animation: flicker 0.5s infinite;
+}
+
+/* Level up shine */
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.level-shine {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shine 2s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-card);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-elevated);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
