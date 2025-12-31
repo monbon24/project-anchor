@@ -61,6 +61,7 @@ export interface Habit {
   bestStreak: number;
   lastCompleted: string | null;
   completedToday: boolean;
+  lastPenalized?: string | null;
 }
 
 // XP required for each level

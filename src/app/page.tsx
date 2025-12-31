@@ -45,7 +45,7 @@ export default function Home() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-text">Project Anchor</h1>
-                <p className="text-xs text-text-muted">Level {level} • Your ADHD Command Center</p>
+                <p className="text-xs text-text-muted">Level {level} • Your Command Center</p>
               </div>
             </div>
             

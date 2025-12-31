@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Drop, Sun, BookOpen, Moon, Barbell, Coffee } from '@phosphor-icons/react';
 import { Habit, PlayerStats } from '@/hooks/useLocalStorage';
 import { Fire } from '@phosphor-icons/react';
@@ -31,6 +32,43 @@ export const defaultHabits: Habit[] = [
 ];
 
 export default function HabitTracker({ habits, setHabits, playerStats, setPlayerStats }: HabitTrackerProps) {
+  
+  // Check for missed habits on mount
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    let damageTaken = 0;
+
+    const updatedHabits = habits.map(habit => {
+      // If not completed today, not completed yesterday, and not yet penalized for yesterday
+      if (
+        habit.lastCompleted !== today && 
+        habit.lastCompleted !== yesterday && 
+        habit.lastPenalized !== yesterday
+      ) {
+        damageTaken += 5;
+        return { ...habit, lastPenalized: yesterday, currentStreak: 0 };
+      }
+      return habit;
+    });
+
+    if (damageTaken > 0) {
+      setHabits(updatedHabits);
+      setPlayerStats(prev => ({
+        ...prev,
+        hp: Math.max(0, prev.hp - damageTaken)
+      }));
+      
+      // Damage notification
+      confetti({
+        particleCount: 20,
+        spread: 40,
+        origin: { y: 0.8 },
+        colors: ['#EF4444', '#7F1D1D'], // Blood red
+        shapes: ['circle'],
+      });
+    }
+  }, []); // Run once on mount
   
   const toggleHabit = (id: string) => {
     const habit = habits.find(h => h.id === id);
